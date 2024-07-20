@@ -5,7 +5,7 @@ public class BancoDePalavrasImpl implements BancoDePalavras{
         return "";
     }
 
-    private void gerarNumeroAleatorio(int maximo) {
+    private void gerarNumeroAleatorio(int max) {
 
     }
 }
