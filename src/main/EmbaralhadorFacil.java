@@ -3,6 +3,15 @@ package main;
 public class EmbaralhadorFacil implements Embaralhador {
     @Override
     public String embaralharPalavra(String palavra) {
-        return "";
+
+        StringBuilder palavraInvertida = new StringBuilder();
+
+        palavra = palavra.toUpperCase();
+
+        for (int i = palavra.length() - 1; i >= 0; i--)  {
+            palavraInvertida.append(palavra.charAt(i));
+        }
+
+        return palavraInvertida.toString();
     }
 }
