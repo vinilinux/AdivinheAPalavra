@@ -1,5 +1,7 @@
 package main;
 
+import utils.NumeroAleatorio;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,7 +11,7 @@ import java.util.Random;
 public class BancoDePalavrasImpl implements BancoDePalavras{
 
     private ArrayList<String> listaPalavras = new ArrayList<>();
-    private ArrayList<Integer> numerosUtilizados = new ArrayList<>();
+    private NumeroAleatorio numeroAleatorio = new NumeroAleatorio();
 
     @Override
     public String palavraAleatoria(String nomeDoArquivo) throws Exception {
@@ -28,26 +30,9 @@ public class BancoDePalavrasImpl implements BancoDePalavras{
             System.out.println(e.getMessage());;
         }
 
-        return listaPalavras.get(gerarNumeroAleatorio());
+
+
+        return listaPalavras.get(numeroAleatorio.gerarNumeroAleatorio(listaPalavras.size()));
     }
 
-    private int gerarNumeroAleatorio() throws Exception {
-
-        Random random = new Random();
-
-        int numeroAleatorio = random.nextInt(20);
-
-       if (numerosUtilizados.contains(numeroAleatorio)) {
-           gerarNumeroAleatorio();
-       }
-
-        if (numerosUtilizados.size() == 20) {
-            throw new Exception("Acabou a lista de palavras");
-        }
-
-        numerosUtilizados.add(numeroAleatorio);
-
-        return numeroAleatorio;
-
-    }
 }
