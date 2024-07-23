@@ -10,7 +10,7 @@ public class FabricaEmbaralhadores {
         if (tipoEmbaralhador.equalsIgnoreCase("facil")){
             return new EmbaralhadorFacil();
         } else if (tipoEmbaralhador.equalsIgnoreCase("medio")) {
-            return new EmbaralhadorDificil();
+            return new EmbaralhadorMedio();
         } else if (tipoEmbaralhador.equalsIgnoreCase("dificil")) {
             return new EmbaralhadorDificil();
         }

@@ -32,7 +32,7 @@ public class BancoDePalavrasImpl implements BancoDePalavras{
 
 
 
-        return listaPalavras.get(numeroAleatorio.gerarNumeroAleatorio(listaPalavras.size()));
+        return listaPalavras.get(numeroAleatorio.gerarNumeroAleatorio(0,listaPalavras.size()));
     }
 
 }
