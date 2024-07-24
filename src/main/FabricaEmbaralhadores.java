@@ -1,21 +1,24 @@
 package main;
 
+import utils.NumeroAleatorio;
+
 public class FabricaEmbaralhadores {
 
-    public Embaralhador getEmbaralhador(String tipoEmbaralhador) {
-        if (tipoEmbaralhador == null) {
-            return null;
-        }
+    NumeroAleatorio numeroAleatorio;
 
-        if (tipoEmbaralhador.equalsIgnoreCase("facil")){
-            return new EmbaralhadorFacil();
-        } else if (tipoEmbaralhador.equalsIgnoreCase("medio")) {
-            return new EmbaralhadorMedio();
-        } else if (tipoEmbaralhador.equalsIgnoreCase("dificil")) {
-            return new EmbaralhadorDificil();
-        }
+    public FabricaEmbaralhadores() {
+        this.numeroAleatorio = new NumeroAleatorio();
+    }
 
-        return null;
+    public Embaralhador getEmbaralhador() {
 
+        int numero = numeroAleatorio.gerarNumeroAleatorio(1,3);
+
+        return switch (numero) {
+            case 1 -> new EmbaralhadorFacil();
+            case 2 -> new EmbaralhadorMedio();
+            case 3 -> new EmbaralhadorDificil();
+            default -> null;
+        };
     }
 }
