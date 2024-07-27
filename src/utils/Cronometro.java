@@ -12,9 +12,10 @@ public class Cronometro {
         this.totalMillis = totalMillis;
         this.timer = new Timer();
         isRunning = false;
+
     }
 
-    public boolean start() {
+    public void start() {
         if (!isRunning) {
             isRunning = true;
             TimerTask task = new TimerTask() {
@@ -26,7 +27,6 @@ public class Cronometro {
             };
             timer.schedule(task, totalMillis);
         }
-        return isRunning;
     }
 
     public void stop() {
@@ -34,5 +34,9 @@ public class Cronometro {
             timer.cancel();
             isRunning = false;
         }
+    }
+
+    public boolean isRunning() {
+        return isRunning;
     }
 }

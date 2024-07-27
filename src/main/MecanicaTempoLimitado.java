@@ -11,15 +11,12 @@ public class MecanicaTempoLimitado implements MecanicaJogo{
     private String palavraEmbaralhada;
     private FabricaEmbaralhadores embaralhadores;
     private BancoDePalavras bancoDePalavras;
-    private long totalMillis;
     private Cronometro cronometro;
-    private boolean tempoAcabou;
     private List<Integer> pontos;
 
     public MecanicaTempoLimitado(BancoDePalavras bancoDePalavras, FabricaEmbaralhadores embaralhadores, long totalMillis, ArrayList<Integer> pontos) {
         this.embaralhadores = embaralhadores;
         this.bancoDePalavras = bancoDePalavras;
-        this.totalMillis = totalMillis;
         cronometro = new Cronometro(totalMillis);
         this.pontos = pontos;
     }
@@ -28,6 +25,7 @@ public class MecanicaTempoLimitado implements MecanicaJogo{
     public void iniciaJogo() {
         gerarPalavraCerta();
         gerarPalavraEmbaralhada();
+        cronometro.start();
     }
 
     private void gerarPalavraEmbaralhada(){
@@ -45,7 +43,6 @@ public class MecanicaTempoLimitado implements MecanicaJogo{
 
     @Override
     public String getPalavraEmbaralhada() {
-        tempoAcabou = cronometro.start();
         return this.palavraEmbaralhada;
     }
 
@@ -54,7 +51,6 @@ public class MecanicaTempoLimitado implements MecanicaJogo{
         if (isJogoTerminado()) return false;
         if (tentativa.equalsIgnoreCase(this.palavraCerta)) {
            cronometro.stop();
-           tempoAcabou = true;
            pontos.add(5);
             return true;
         }
@@ -80,7 +76,7 @@ public class MecanicaTempoLimitado implements MecanicaJogo{
 
     @Override
     public boolean isPartidaTerminou() {
-        return tempoAcabou;
+        return cronometro.isRunning();
     }
 
     @Override
