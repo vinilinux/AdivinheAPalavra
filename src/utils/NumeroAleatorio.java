@@ -21,4 +21,8 @@ public class NumeroAleatorio {
         return numeroAleatorio;
     }
 
+    public int getTotalNumerosUtilizados() {
+        return numerosUtilizados.size();
+    }
+
 }

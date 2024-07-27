@@ -6,8 +6,6 @@ public class EmbaralhadorFacil implements Embaralhador {
 
         StringBuilder palavraInvertida = new StringBuilder();
 
-        palavra = palavra.toUpperCase();
-
         for (int i = palavra.length() - 1; i >= 0; i--)  {
             palavraInvertida.append(palavra.charAt(i));
         }

@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class BancoDePalavrasImpl implements BancoDePalavras{
 
@@ -14,9 +13,9 @@ public class BancoDePalavrasImpl implements BancoDePalavras{
     private NumeroAleatorio numeroAleatorio = new NumeroAleatorio();
 
     @Override
-    public String palavraAleatoria(String nomeDoArquivo) throws Exception {
+    public String palavraAleatoria() throws Exception {
 
-        String path = "files/" + nomeDoArquivo;
+        String path = "files/palavras";
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
@@ -30,9 +29,11 @@ public class BancoDePalavrasImpl implements BancoDePalavras{
             System.out.println(e.getMessage());;
         }
 
-
-
         return listaPalavras.get(numeroAleatorio.gerarNumeroAleatorio(0,listaPalavras.size()));
+    }
+
+    public int getTotalPalavrasUtilizadas() {
+        return numeroAleatorio.getTotalNumerosUtilizados();
     }
 
 }

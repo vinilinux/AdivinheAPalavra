@@ -4,6 +4,7 @@ import java.io.IOException;
 
 public interface BancoDePalavras {
 
-    public String palavraAleatoria(String nomeDoArquivo) throws Exception;
+    String palavraAleatoria() throws Exception;
+    int getTotalPalavrasUtilizadas();
 
 }

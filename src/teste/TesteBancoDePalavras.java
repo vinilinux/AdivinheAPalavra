@@ -20,7 +20,7 @@ public class TesteBancoDePalavras {
 
         String actual = "";
         try {
-            actual = palavras.palavraAleatoria("facil");
+            actual = palavras.palavraAleatoria();
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
