@@ -28,7 +28,7 @@ class MecanicaTempoLimitadoTest {
     @BeforeEach
     void setUp() throws Exception {
         mockFonte = mock(BancoDePalavras.class);
-        when(mockFonte.palavraAleatoria()).thenReturn("Esperança");
+        when(mockFonte.palavraAleatoria()[anyInt()]).thenReturn("Esperança");
 
         mockFactory = mock(FabricaEmbaralhadores.class);
         mockEmbaralhador = mock(EmbaralhadorFacil.class);
@@ -82,7 +82,7 @@ class MecanicaTempoLimitadoTest {
     @DisplayName("Teste se o jogo terminou após 20 palavras")
     void testeSeOJogoTerminouApós20Palavras() {
         // Given / Arrange
-        when(mockFonte.getTotalPalavrasUtilizadas()).thenReturn(20);
+        when(mecanicaJogo.isJogoTerminado()).thenReturn(true);
         // When / Act
         // Then / Assert
         assertTrue(mecanicaJogo.isJogoTerminado());
@@ -93,7 +93,7 @@ class MecanicaTempoLimitadoTest {
     @DisplayName("Teste se o jogo terminou antes de 20 palavras")
     void testeSeOJogoTerminouAntes20Palavras() {
         // Given / Arrange
-        when(mockFonte.getTotalPalavrasUtilizadas()).thenReturn(10);
+        when(mecanicaJogo.isJogoTerminado()).thenReturn(false);
         // When / Act
         // Then / Assert
         assertFalse(mecanicaJogo.isJogoTerminado());

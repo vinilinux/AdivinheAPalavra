@@ -10,12 +10,13 @@ import java.util.List;
 
 public class MecanicaTempoLimitado implements MecanicaJogo{
 
-    private String palavraCerta;
+    private String[] palavraCerta;
     private String palavraEmbaralhada;
     private FabricaEmbaralhadores embaralhadores;
     private BancoDePalavras bancoDePalavras;
     private Cronometro cronometro;
     private List<Integer> pontos;
+    private int cont=0;
 
     public MecanicaTempoLimitado(BancoDePalavras bancoDePalavras, FabricaEmbaralhadores embaralhadores, long totalMillis, ArrayList<Integer> pontos) {
         this.embaralhadores = embaralhadores;
@@ -33,7 +34,7 @@ public class MecanicaTempoLimitado implements MecanicaJogo{
 
     private void gerarPalavraEmbaralhada(){
         Embaralhador embaralhador = embaralhadores.getEmbaralhador();
-        this.palavraEmbaralhada = embaralhador.embaralharPalavra(this.palavraCerta);
+        this.palavraEmbaralhada = embaralhador.embaralharPalavra(this.palavraCerta[cont]);
     }
 
     private void gerarPalavraCerta(){
@@ -52,7 +53,7 @@ public class MecanicaTempoLimitado implements MecanicaJogo{
     @Override
     public boolean verificarTentativa(String tentativa) {
         if (isJogoTerminado()) return false;
-        if (tentativa.equalsIgnoreCase(this.palavraCerta)) {
+        if (tentativa.equalsIgnoreCase(this.palavraCerta[cont])) {
            cronometro.stop();
            pontos.add(5);
             return true;
@@ -62,7 +63,7 @@ public class MecanicaTempoLimitado implements MecanicaJogo{
 
     @Override
     public boolean isJogoTerminado() {
-        if (bancoDePalavras.getTotalPalavrasUtilizadas() == 20) {
+        if (cont == 20) {
             return true;
         }
         return false;
@@ -80,5 +81,10 @@ public class MecanicaTempoLimitado implements MecanicaJogo{
     @Override
     public boolean isPartidaTerminou() {
         return cronometro.isRunning();
+    }
+
+    @Override
+    public int getStatus() {
+        return 0;
     }
 }

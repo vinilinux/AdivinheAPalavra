@@ -11,6 +11,10 @@ public class NumeroAleatorio {
 
     public int gerarNumeroAleatorio(int min, int max) {
 
+        if (numerosUtilizados.size() > max) {
+            throw new IndexOutOfBoundsException("Limite de número utilizadaos atingidos");
+        }
+
          numeroAleatorio = random.nextInt((max - min) + 1) + min;
 
         if (numerosUtilizados.contains(numeroAleatorio)) {
@@ -18,11 +22,7 @@ public class NumeroAleatorio {
         }else {
             numerosUtilizados.add(numeroAleatorio);
         }
+
         return numeroAleatorio;
     }
-
-    public int getTotalNumerosUtilizados() {
-        return numerosUtilizados.size();
-    }
-
 }

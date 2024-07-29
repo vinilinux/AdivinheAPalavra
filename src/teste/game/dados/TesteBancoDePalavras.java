@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class TesteBancoDePalavras {
 
@@ -18,7 +19,8 @@ public class TesteBancoDePalavras {
         BancoDePalavras palavras = new BancoDePalavrasImpl();
         // When / Act
 
-        String actual = "";
+        String[] actual = new String[0];
+
         try {
             actual = palavras.palavraAleatoria();
         } catch (IOException e) {
@@ -28,9 +30,7 @@ public class TesteBancoDePalavras {
             throw new RuntimeException(e);
         }
 
-        String expect = "Casa";
         // Then / Assert
-
         assertNotNull(actual);
     }
 }

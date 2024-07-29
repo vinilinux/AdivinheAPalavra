@@ -1,18 +1,13 @@
 package game.embaralhadores;
-
-import utils.NumeroAleatorio;
+import java.util.Random;
 
 public class FabricaEmbaralhadores {
 
-    NumeroAleatorio numeroAleatorio;
-
-    public FabricaEmbaralhadores() {
-        this.numeroAleatorio = new NumeroAleatorio();
-    }
-
     public Embaralhador getEmbaralhador() {
 
-        int numero = numeroAleatorio.gerarNumeroAleatorio(1,3);
+        Random random = new Random();
+
+        int numero = random.nextInt(1,4);
 
         return switch (numero) {
             case 1 -> new EmbaralhadorFacil();

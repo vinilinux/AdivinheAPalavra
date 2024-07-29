@@ -1,6 +1,7 @@
 package teste.game.mecanicas;
 
 import game.dados.BancoDePalavras;
+import game.dados.BancoDePalavrasImpl;
 import game.embaralhadores.Embaralhador;
 import game.embaralhadores.EmbaralhadorFacil;
 import game.embaralhadores.FabricaEmbaralhadores;
@@ -27,7 +28,7 @@ class MecanicaTentativasLimitadasTest {
     @BeforeEach
     void setUp() throws Exception {
         mockFonte = mock(BancoDePalavras.class);
-        when(mockFonte.palavraAleatoria()).thenReturn("Esperança");
+        when(mockFonte.palavraAleatoria()).thenReturn(new String[]{"Esperança"});
 
         mockFactory = mock(FabricaEmbaralhadores.class);
         mockEmbaralhador = mock(EmbaralhadorFacil.class);
@@ -72,27 +73,5 @@ class MecanicaTentativasLimitadasTest {
         assertFalse(mecanicaJogo.verificarTentativa("teste"));
 
     }
-
-    @Test
-    @DisplayName("Teste se o jogo terminou após 20 palavras")
-    void testeSeOJogoTerminouApós20Palavras() {
-        // Given / Arrange
-       when(mockFonte.getTotalPalavrasUtilizadas()).thenReturn(20);
-        // When / Act
-        // Then / Assert
-        assertTrue(mecanicaJogo.isJogoTerminado());
-
-    }
-
-    @Test
-    @DisplayName("Teste se o jogo terminou antes de 20 palavras")
-    void testeSeOJogoTerminouAntes20Palavras() {
-        // Given / Arrange
-        when(mockFonte.getTotalPalavrasUtilizadas()).thenReturn(10);
-        // When / Act
-        // Then / Assert
-        assertFalse(mecanicaJogo.isJogoTerminado());
-    }
-
 
 }

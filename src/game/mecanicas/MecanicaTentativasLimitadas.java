@@ -10,35 +10,36 @@ import java.util.List;
 
 public class MecanicaTentativasLimitadas implements MecanicaJogo{
 
-    private String palavraCerta;
-    private String palavraEmbaralhada;
+    private String[] palavraCerta;
     private FabricaEmbaralhadores embaralhadores;
     private BancoDePalavras bancoDePalavras;
     private int tentativasTotal;
     private int tentativasFeitas;
     private List<Integer> tentativasUtilizadas;
     private boolean partidaTerminou;
+    private int cont;
 
     public MecanicaTentativasLimitadas(BancoDePalavras bancoDePalavras, FabricaEmbaralhadores embaralhadores) {
         this.embaralhadores = embaralhadores;
         this.bancoDePalavras = bancoDePalavras;
         this.tentativasUtilizadas = new ArrayList<>();
+        this.palavraCerta = new String[0];
         this.tentativasTotal = 3;
-        this.tentativasFeitas = 1;
+        this.tentativasFeitas = 0;
+        this.cont = 0;
     }
 
     @Override
     public void iniciaJogo() {
-        gerarPalavraCerta();
-        gerarPalavraEmbaralhada();
+        gerarPalavrasCerta();
     }
 
-    private void gerarPalavraEmbaralhada(){
+    private String gerarPalavraEmbaralhada(){
         Embaralhador embaralhador = embaralhadores.getEmbaralhador();
-        this.palavraEmbaralhada = embaralhador.embaralharPalavra(this.palavraCerta);
+        return embaralhador.embaralharPalavra(this.palavraCerta[cont]);
     }
 
-    private void gerarPalavraCerta(){
+    private void gerarPalavrasCerta(){
         try{
             this.palavraCerta = bancoDePalavras.palavraAleatoria();
         } catch (Exception e) {
@@ -48,7 +49,7 @@ public class MecanicaTentativasLimitadas implements MecanicaJogo{
 
     @Override
     public String getPalavraEmbaralhada() {
-       return this.palavraEmbaralhada;
+       return gerarPalavraEmbaralhada();
     }
 
     @Override
@@ -56,18 +57,23 @@ public class MecanicaTentativasLimitadas implements MecanicaJogo{
         if (isJogoTerminado())  {
             return false;
         }
-        if (tentativa.equalsIgnoreCase(this.palavraCerta)) {
+        if (this.palavraCerta[cont].equalsIgnoreCase(tentativa)) {
             tentativasUtilizadas.add(tentativasFeitas);
+            partidaTerminou = true;
+            cont++;
             return true;
         }
-        if (tentativasFeitas == tentativasTotal) tentativasUtilizadas.add(0);
+        if (tentativasFeitas == tentativasTotal) {
+            tentativasUtilizadas.add(0);
+            cont++;
+        }
         this.tentativasFeitas++;
         return false;
     }
 
     @Override
     public boolean isJogoTerminado() {
-        if (bancoDePalavras.getTotalPalavrasUtilizadas() == 20) {
+        if (cont == 20) {
             return true;
         }
         return false;
@@ -76,9 +82,9 @@ public class MecanicaTentativasLimitadas implements MecanicaJogo{
     @Override
     public boolean isPartidaTerminou(){
         if (tentativasFeitas == tentativasTotal) {
-            return true;
+            partidaTerminou = true;
         }
-        return false;
+        return partidaTerminou;
     }
 
     @Override
@@ -92,5 +98,10 @@ public class MecanicaTentativasLimitadas implements MecanicaJogo{
             }
         }
         return total;
+    }
+
+    @Override
+    public int getStatus() {
+        return tentativasFeitas;
     }
 }

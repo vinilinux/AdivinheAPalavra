@@ -2,7 +2,6 @@ package game.dados;
 
 public interface BancoDePalavras {
 
-    String palavraAleatoria() throws Exception;
-    int getTotalPalavrasUtilizadas();
+    String[] palavraAleatoria() throws Exception;
 
 }

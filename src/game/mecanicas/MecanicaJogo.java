@@ -8,4 +8,5 @@ public interface MecanicaJogo {
     boolean isJogoTerminado();
     int calcularPontuacao();
     boolean isPartidaTerminou();
+    int getStatus();
 }
