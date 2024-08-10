@@ -49,6 +49,8 @@ public class MecanicaTentativasLimitadas implements MecanicaJogo{
 
     @Override
     public String getPalavraEmbaralhada() {
+        this.tentativasFeitas  = 0;
+        this.partidaTerminou = false;
        return gerarPalavraEmbaralhada();
     }
 
@@ -73,7 +75,7 @@ public class MecanicaTentativasLimitadas implements MecanicaJogo{
 
     @Override
     public boolean isJogoTerminado() {
-        if (cont == 20) {
+        if (cont == this.palavraCerta.length - 1) {
             return true;
         }
         return false;

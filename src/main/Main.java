@@ -23,9 +23,9 @@ public class Main {
 
         MecanicaJogo jogo = fabricaMecanica.getMecanica(escolha, bancoDePalavras, fabricaEmbaralhadores, 60000);
 
-        System.out.println("Descubra a palavra embaralhada");
         jogo.iniciaJogo();
         while (!jogo.isJogoTerminado()) {
+            System.out.println("Descubra a palavra embaralhada: ");
             System.out.println(jogo.getPalavraEmbaralhada());
             while (!jogo.isPartidaTerminou()) {
                 String tentativa = sc.next();
@@ -36,8 +36,6 @@ public class Main {
                }
             }
         }
-
         System.out.println("Total de pontos feito " + jogo.calcularPontuacao());
-
     }
 }
